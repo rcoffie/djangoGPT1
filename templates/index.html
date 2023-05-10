@@ -1,5 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-md-10 m-auto p-none">
+     
+         {% if code %}
+
+         <pre>
+            <code class='line-numbers language-{{lang}}'>
+            {{code}}
+            </code>
+            </pre> 
+
+
+
+            <form action="{% url 'home' %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="code" rows="3" placeholder="Code" required></textarea>
+                  </div>   
+                  <label for="cars">Select Programming Language:</label>
+                  <select class="form-select form-select-sm" name="lang" required>
+                     <option value=""></option>
+                    {% for language in lang_list %}
+                    <option value="{{language}}">{{language}}</option>
+                    {% endfor %}
+                    
+                  </select>
+                  <br>
+              <button type="submit" class="btn btn-secondary">submit</button>
+             </form>  
+              
+
+
+         {% else %}
+           <pre>
+               <code class='line-numbers language-python'>
+               if name == "test":
+                  print("Hello test!")
+               else:
+                   print("Hello Friend")
+               </code>
+               </pre> 
+
+   
+
+                <form action="{% url 'home' %}" method="POST">
+                   {% csrf_token %}
+                   <div class="mb-3">
+                       <label for="exampleFormControlTextarea1" class="form-label"></label>
+                       <textarea class="form-control" id="exampleFormControlTextarea1" name="code" rows="3" placeholder="Code" required></textarea>
+                     </div>   
+                     <label for="cars">Select Programming Language:</label>
+                     <select class="form-select form-select-sm" name="lang" required>
+                        <option value=""></option>
+                       {% for language in lang_list %}
+                       <option value="{{language}}">{{language}}</option>
+                       {% endfor %}
+                       
+                     </select>
+                     <br>
+                 <button type="submit" class="btn btn-secondary">submit</button>
+                </form>   
+
+            {% endif %}
+       </div>
+    </div>
+</div>
+
 
 {% endblock %}
+
+
